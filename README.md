@@ -1,24 +1,63 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| nickname           | string | null: false |
+| email              | string | null: false |
+| encrypted_password | string | null: false |
+| last_name          | string | null: false |
+| first_name         | string | null: false |
+| last_name_kana     | string | null: false |
+| first_name_kana    | string | null: false |
+| year_of_birth      | date   | null: false |
+| month_of_birth     | date   | null: false |
+| date_of_birth      | date   | null: false |
 
-* Ruby version
+### Association
+- has_many :items
+- has_many :records
 
-* System dependencies
+## items テーブル
 
-* Configuration
+| Column        | Type       | Options                        |
+| --------------| ---------- | ------------------------------ |
+| product       | string     | null: false                    |
+| category      | text       | null: false                    |
+| price         | integer    | null: false                    |
+| condition     | text       | null: false                    |
+| delivery_fee  | integer    | null: false                    |
+| area          | string     | null: false                    |
+| shipment      | integer    | null: false                    |
+| user          | references | null: false, foreign_key: true |
 
-* Database creation
+### Association
+- belongs_to: user
+- has_one: records
 
-* Database initialization
+## records テーブル
 
-* How to run the test suite
+| Column   | Type       | Options                        |
+| ---------| ---------- | ------------------------------ |
+| items    | references | null: false, foreign_key: true |
+| users    | references | null: false, foreign_key: true |
 
-* Services (job queues, cache servers, search engines, etc.)
+### Association
+- belongs_to: user
+- belongs_to: item
+- belongs_to: address
 
-* Deployment instructions
+## addresses テーブル
 
-* ...
+| Column        | Type       | Options       |
+| --------------| ---------- | ------------- |
+| postal_code   | text       | null: false   |
+| state         | string     | null: false   |
+| city          | string     | null: false   |
+| address_line  | string     | null: false   |
+| building      | string     |               |
+| phone_number  | string     | null: false   |
+
+### Association
+- has_many: records
