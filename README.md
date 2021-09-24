@@ -32,7 +32,7 @@
 
 ### Association
 - belongs_to: user
-- has_one: records
+- has_one: record
 
 ## records テーブル
 
@@ -48,14 +48,15 @@
 
 ## addresses テーブル
 
-| Column        | Type       | Options       |
-| --------------| ---------- | ------------- |
-| postal_code   | string     | null: false   |
-| state         | string     | null: false   |
-| city          | string     | null: false   |
-| address_line  | string     | null: false   |
-| building      | string     |               |
-| phone_number  | string     | null: false   |
+| Column        | Type       | Options                        |
+| --------------| ---------- | ------------------------------ |
+| postal_code   | string     | null: false                    |
+| state         | string     | null: false                    |
+| city          | string     | null: false                    |
+| address_line  | string     | null: false                    |
+| building      | string     |                                |
+| phone_number  | string     | null: false                    |
+| record        | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to: record
