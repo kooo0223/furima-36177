@@ -22,6 +22,7 @@
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
 | product         | string     | null: false                    |
+| text            | text       | null: false                    |
 | price           | integer    | null: false                    |
 | category_id     | integer    | null: false                    |
 | condition_id    | integer    | null: false                    |
@@ -51,7 +52,7 @@
 | Column        | Type       | Options                        |
 | --------------| ---------- | ------------------------------ |
 | postal_code   | string     | null: false                    |
-| state         | string     | null: false                    |
+| area_id       | integer    | null: false                    |
 | city          | string     | null: false                    |
 | address_line  | string     | null: false                    |
 | building      | string     |                                |
