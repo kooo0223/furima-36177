@@ -38,10 +38,10 @@ ActiveRecord::Schema.define(version: 2021_10_05_075452) do
     t.text "explanation", null: false
     t.integer "price", null: false
     t.integer "category_id", null: false
-    t.integer "condition_id", null: false
-    t.integer "delivery_fee_id", null: false
-    t.integer "area_id", null: false
-    t.integer "shipment_id", null: false
+    t.integer "sales_status_id", null: false
+    t.integer "shipping_fee_status_id", null: false
+    t.integer "prefecture_id", null: false
+    t.integer "scheduled_delivery_id", null: false
     t.string "user", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
