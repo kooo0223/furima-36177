@@ -1,9 +1,9 @@
 class ItemsController < ApplicationController
-  before_action :move_to_index, except: [:index, :show, :new]
+  before_action :move_to_index, except: [:index, :new]
   before_action :authenticate_user!, only: [:new]
 
   def index
-    @item = Item.order('created_at DESC')
+    #@item = Item.order('created_at DESC')
   end
 
   def new
