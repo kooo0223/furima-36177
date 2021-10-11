@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new]
 
   def index
-    @item = Item.order("created_at DESC")
+    @item = Item.order('created_at DESC')
   end
 
   def new
@@ -19,13 +19,14 @@ class ItemsController < ApplicationController
     end
   end
 
-  #def show
-  #end
+  # def show
+  # end
 
   private
 
   def item_params
-    column = :product, :explanation, :price, :category_id, :sales_status_id, :shipping_fee_status_id, :prefecture_id, :scheduled_delivery_id, :image
+    column = :product, :explanation, :price, :category_id, :sales_status_id, :shipping_fee_status_id, :prefecture_id,
+             :scheduled_delivery_id, :image
     params.require(:item).permit(column).merge(user_id: current_user.id)
   end
 
@@ -34,9 +35,9 @@ class ItemsController < ApplicationController
   end
 end
 
-  #def move_to_index
-  #  prototype = Prototype.find(params[:id])
-  #  unless current_user.id == prototype.user_id
-  #    redirect_to action: :index
-  #  end
-  #end
+# def move_to_index
+#  prototype = Prototype.find(params[:id])
+#  unless current_user.id == prototype.user_id
+#    redirect_to action: :index
+#  end
+# end

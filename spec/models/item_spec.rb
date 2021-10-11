@@ -30,7 +30,7 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Explanation can't be blank")
       end
-      
+
       it 'カテゴリーが未選択(--)では保存できない' do
         @item.category_id = '1'
         @item.valid?
@@ -70,13 +70,13 @@ RSpec.describe Item, type: :model do
       it '価格が300円未満では保存できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
+        expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
 
       it '価格が10,000,000円以上では保存できない' do
-        @item.price = 10000000
+        @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+        expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
 
       it '価格は半角でなければ登録できない' do
@@ -94,7 +94,7 @@ RSpec.describe Item, type: :model do
       it 'ユーザーが紐付いていなければ保存できない' do
         @item.user = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("User must exist")
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end
