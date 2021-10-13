@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :move_to_index, except: [:index, :new]
+  before_action :move_to_index, except: [:index, :new, :show]
   before_action :authenticate_user!, only: [:new]
 
   def index
@@ -19,8 +19,9 @@ class ItemsController < ApplicationController
     end
   end
 
-  # def show
-  # end
+  def show
+    @item = Item.find(params[:id])
+  end
 
   private
 
@@ -34,10 +35,3 @@ class ItemsController < ApplicationController
     redirect_to action: :index unless user_signed_in?
   end
 end
-
-# def move_to_index
-#  prototype = Prototype.find(params[:id])
-#  unless current_user.id == prototype.user_id
-#    redirect_to action: :index
-#  end
-# end
