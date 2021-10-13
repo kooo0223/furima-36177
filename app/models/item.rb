@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :scheduled_delivery
   has_one_attached :image
+  has_one :record
 
   validates :product, :explanation, :image, presence: true
 
