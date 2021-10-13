@@ -6,14 +6,16 @@
     <h2 class="name">
       <%= @item.product %>
     </h2>
+    
     <div class="item-img-content">
       <%= image_tag @item.image ,class:"item-box-img" %>
-      <%# 商品が売れている場合は、sold outを表示しましょう %>
+      <% if @item.record.present? %>
       <div class="sold-out">
         <span>Sold Out!!</span>
       </div>
-      <%# //商品が売れている場合は、sold outを表示しましょう %>
+      <% end %>
     </div>
+
     <div class="item-price-box">
       <span class="item-price">
         <%= @item.price %>円
@@ -31,40 +33,41 @@
 
       <% else %>
         <%= link_to "購入画面に進む", "#" ,class:"item-red-btn"%>
-
-        <div class="item-explain-box">
-          <span><%= @item.explanation %></span>
-        </div>
-        <table class="detail-table">
-          <tbody>
-            <tr>
-              <th class="detail-item">出品者</th>
-              <td class="detail-value"><%= @item.user.nickname %></td>
-            </tr>
-            <tr>
-              <th class="detail-item">カテゴリー</th>
-              <td class="detail-value"><%= Category.find(@item.category_id)[:name] %></td>
-            </tr>
-            <tr>
-              <th class="detail-item">商品の状態</th>
-              <td class="detail-value"><%= SalesStatus.find(@item.sales_status_id)[:name] %></td>
-            </tr>
-            <tr>
-              <th class="detail-item">配送料の負担</th>
-              <td class="detail-value"><%= ShippingFeeStatus.find(@item.shipping_fee_status_id)[:name] %></td>
-            </tr>
-            <tr>
-              <th class="detail-item">発送元の地域</th>
-              <td class="detail-value"><%= Prefecture.find(@item.prefecture_id)[:name] %></td>
-            </tr>
-            <tr>
-              <th class="detail-item">発送日の目安</th>
-              <td class="detail-value"><%= ScheduledDelivery.find(@item.scheduled_delivery_id)[:name] %></td>
-            </tr>
-          </tbody>
-        </table>
       <% end %>
+
+      <div class="item-explain-box">
+        <span><%= @item.explanation %></span>
+      </div>
+      <table class="detail-table">
+        <tbody>
+          <tr>
+            <th class="detail-item">出品者</th>
+            <td class="detail-value"><%= @item.user.nickname %></td>
+          </tr>
+          <tr>
+            <th class="detail-item">カテゴリー</th>
+            <td class="detail-value"><%= Category.find(@item.category_id)[:name] %></td>
+          </tr>
+          <tr>
+            <th class="detail-item">商品の状態</th>
+            <td class="detail-value"><%= SalesStatus.find(@item.sales_status_id)[:name] %></td>
+          </tr>
+          <tr>
+            <th class="detail-item">配送料の負担</th>
+            <td class="detail-value"><%= ShippingFeeStatus.find(@item.shipping_fee_status_id)[:name] %></td>
+          </tr>
+          <tr>
+            <th class="detail-item">発送元の地域</th>
+            <td class="detail-value"><%= Prefecture.find(@item.prefecture_id)[:name] %></td>
+          </tr>
+          <tr>
+            <th class="detail-item">発送日の目安</th>
+            <td class="detail-value"><%= ScheduledDelivery.find(@item.scheduled_delivery_id)[:name] %></td>
+          </tr>
+        </tbody>
+      </table>
     <% end %>
+    
     <div class="option">
         <div class="favorite-btn">
           <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
