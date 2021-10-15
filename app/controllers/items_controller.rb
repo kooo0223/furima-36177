@@ -27,7 +27,6 @@ class ItemsController < ApplicationController
     if Record.exists?(item_id: params[:id]) || (Item.find(params[:id]).user_id != current_user.id)
       redirect_to root_path
     else
-      #@item = Item.find(params[:id])
       item_find
     end
   end
