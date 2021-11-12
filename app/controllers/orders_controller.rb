@@ -1,10 +1,10 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :create]
+
   def index
     @item = Item.find(params[:item_id])
+    redirect_to root_path if Record.exists?(item_id: params[:id]) || (@item.user_id == current_user.id)
     @order = Order.new
-  end
-
-  def new
   end
 
   def create
@@ -22,24 +22,17 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:postal_code, :prefecture_id, :city, :address_line, :building, :phone_number, :record_id).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+    params.require(:order).permit(:postal_code, :prefecture_id, :city, :address_line, :building, :phone_number, :record_id).merge(
+      user_id: current_user.id, item_id: params[:item_id], token: params[:token]
+    )
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: Item.find(order_params[:item_id])[:price],
       card: order_params[:token],
       currency: 'jpy'
     )
   end
-
-  #def record_params
-  #  params.permit(:item_id).merge(user_id: current_user.id)
-  #end
-
-  #def address_params
-  #  params.permit(:postal_code, :prefecture_id, :city, :address_line, :building, :phone_number).merge(record_id: @record.id)
-  #end
-
 end
