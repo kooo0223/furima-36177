@@ -3,7 +3,6 @@ class OrdersController < ApplicationController
   before_action :item_find, only: [:index, :create]
 
   def index
-    itme_find
     if Record.exists?(item_id: params[:item_id]) || (@item.user_id == current_user.id)
       redirect_to root_path
     end
@@ -17,7 +16,6 @@ class OrdersController < ApplicationController
       @order.save
       redirect_to root_path
     else
-      item_find
       render :index
     end
   end
