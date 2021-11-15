@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit]
-  before_action :item_find, only:[:show, :update, :edit, :destroy]
+  before_action :item_find, only: [:show, :update, :edit, :destroy]
 
   def index
     @items = Item.order('created_at DESC')
@@ -23,9 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if Record.exists?(item_id: params[:id]) || (@item.user_id != current_user.id)
-      redirect_to root_path
-    end
+    redirect_to root_path if Record.exists?(item_id: params[:id]) || (@item.user_id != current_user.id)
   end
 
   def update
